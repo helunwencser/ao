@@ -1291,8 +1291,8 @@ class TestAutoQuant(unittest.TestCase):
                 y = self.mha(x, x, x)[0]
                 return self.lin(y)
 
-        mod = MHAModel()
-        input = torch.randn(1,1,4096)
+        mod = MHAModel().to(device).to(dtype)
+        input = torch.randn(1,1,4096).to(device).to(dtype)
         out=mod(*input)
 
         torchao.autoquant(mod, set_inductor_config=False)
